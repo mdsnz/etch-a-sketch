@@ -27,24 +27,39 @@ function renderGrid(size) {
   changeColorPixel();
 }
 
+let isDragging = false;
+
 function changeColorPixel() {
   const pixels = document.querySelectorAll(".pixel");
 
   pixels.forEach((pixel) => {
-    pixel.addEventListener("mouseover", () => {
-      if (!pixel.classList.contains("pixel-painted")) {
-        pixel.setAttribute("class", "pixel pixel-painted");
-        let r = Math.floor(Math.random() * 256);
-        let g = Math.floor(Math.random() * 256);
-        let b = Math.floor(Math.random() * 256);
-        pixel.style.backgroundColor = `rgb(${r},${g},${b})`;
-        pixel.style.opacity = "0.1";
-      } else {
+    pixel.addEventListener("mousedown", (e) => {
+      isDragging = true;
+
+      e.preventDefault();
+    });
+
+    pixel.addEventListener("mousemove", () => {
+      if (isDragging) {
+        if (!pixel.classList.contains("pixel-painted")) {
+          pixel.setAttribute("class", "pixel pixel-painted");
+          let r = Math.floor(Math.random() * 256);
+          let g = Math.floor(Math.random() * 256);
+          let b = Math.floor(Math.random() * 256);
+          pixel.style.backgroundColor = `rgb(${r},${g},${b})`;
+          pixel.style.opacity = "0.1";
+        } else {
           let atualOpacity = Number(pixel.style.opacity);
           atualOpacity = atualOpacity + 0.1;
           pixel.style.opacity = atualOpacity;
+        }
       }
     });
+
+    pixel.addEventListener('mouseup', () => {
+      isDragging = false;
+    })
+
   });
 }
 
@@ -56,3 +71,15 @@ function changePixelsSize(correctPixelSize) {
     pixel.style.height = `${correctPixelSize}px`;
   });
 }
+
+/* 
+TODO: 
+[x] Paint square only if click or click and drag
+[] Make the rainbow mode optional
+[] Make the transparency mode an easter egg
+[] Add eraser
+[] Add Clear
+[] Add a box for the user choose the color
+[] Add sizeSlider (<input type="range">)
+
+*/
