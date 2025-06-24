@@ -8,3 +8,11 @@ for (let i = 0; i < 16; i++) {
         containerDiv.appendChild(pixel);
     }
 }
+
+const pixels = document.querySelectorAll('.pixel');
+
+pixels.forEach((pixel) => {
+    pixel.addEventListener('mouseover', () => {
+        pixel.setAttribute('class', 'pixel pixel-painted')
+    })
+} )

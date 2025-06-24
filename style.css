@@ -24,6 +24,7 @@ body {
     border: 1px solid black;
 }
 
-.pixel:hover {
+.pixel-painted {
     background-color: red;
 }
+
