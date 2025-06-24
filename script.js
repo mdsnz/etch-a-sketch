@@ -8,7 +8,7 @@ changeSizeBtn.addEventListener("click", () => {
   let chosenSize = prompt("Type the new size for the grid (1-100)", 8);
   sizeText.innerHTML = `Current display size: ${chosenSize}x${chosenSize}`;
   renderGrid(chosenSize);
-  let correctPixelSize = 500 / chosenSize - 2;
+  let correctPixelSize = 500 / chosenSize;
   changePixelsSize(correctPixelSize);
 });
 

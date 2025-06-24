@@ -35,9 +35,8 @@ body {
 }
 
 .pixel {
-  width: 60.5px;
-  height: 60.5px;
-  border: 1px solid black;
+  width: 62.5px;
+  height: 62.5px;
 }
 
 .pixel-painted {
