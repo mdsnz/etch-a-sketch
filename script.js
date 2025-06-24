@@ -8,8 +8,7 @@ changeSizeBtn.addEventListener("click", () => {
   let chosenSize = prompt("Type the new size for the grid (1-100)", 8);
   sizeText.innerHTML = `Current display size: ${chosenSize}x${chosenSize}`;
   renderGrid(chosenSize);
-  let correctPixelSize = (500/chosenSize) - 2;
-  console.log(correctPixelSize)
+  let correctPixelSize = 500 / chosenSize - 2;
   changePixelsSize(correctPixelSize);
 });
 
@@ -24,21 +23,36 @@ function renderGrid(size) {
       containerDiv.appendChild(pixel);
     }
   }
+
+  changeColorPixel();
+}
+
+function changeColorPixel() {
   const pixels = document.querySelectorAll(".pixel");
 
   pixels.forEach((pixel) => {
     pixel.addEventListener("mouseover", () => {
-      pixel.setAttribute("class", "pixel pixel-painted");
+      if (!pixel.classList.contains("pixel-painted")) {
+        pixel.setAttribute("class", "pixel pixel-painted");
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        pixel.style.backgroundColor = `rgb(${r},${g},${b})`;
+        pixel.style.opacity = "0.1";
+      } else {
+          let atualOpacity = Number(pixel.style.opacity);
+          atualOpacity = atualOpacity + 0.1;
+          pixel.style.opacity = atualOpacity;
+      }
     });
   });
 }
 
 function changePixelsSize(correctPixelSize) {
+  const pixels = document.querySelectorAll(".pixel");
 
-    const pixels = document.querySelectorAll(".pixel");
-
-    pixels.forEach((pixel) => {
-        pixel.style.width = `${correctPixelSize}px`;
-        pixel.style.height = `${correctPixelSize}px`
-    })
+  pixels.forEach((pixel) => {
+    pixel.style.width = `${correctPixelSize}px`;
+    pixel.style.height = `${correctPixelSize}px`;
+  });
 }
